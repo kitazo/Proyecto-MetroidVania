@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: 3037c4e012993494fa983135dfed7757
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1739350815322275991
+    second: forgotten_forest_example_tileset_0
+  - first:
+      213: 6165999377751361833
+    second: forgotten_forest_example_tileset_1
+  - first:
+      213: 1887252187191796372
+    second: forgotten_forest_example_tileset_2
+  - first:
+      213: 3670287149641450209
+    second: forgotten_forest_example_tileset_3
+  - first:
+      213: 3893260822895380989
+    second: forgotten_forest_example_tileset_4
+  - first:
+      213: -7648321616044760630
+    second: forgotten_forest_example_tileset_5
+  - first:
+      213: -1181064247561121533
+    second: forgotten_forest_example_tileset_6
+  - first:
+      213: 7145403934216853739
+    second: forgotten_forest_example_tileset_7
+  - first:
+      213: -4530545835161785781
+    second: forgotten_forest_example_tileset_8
+  - first:
+      213: -9139655484734213647
+    second: forgotten_forest_example_tileset_9
+  - first:
+      213: -7881110228725083061
+    second: forgotten_forest_example_tileset_10
+  - first:
+      213: -7878071518407912233
+    second: forgotten_forest_example_tileset_11
+  - first:
+      213: 3703468462369005949
+    second: forgotten_forest_example_tileset_12
+  - first:
+      213: 4232005949711629300
+    second: forgotten_forest_example_tileset_13
+  - first:
+      213: 6961742492237046597
+    second: forgotten_forest_example_tileset_14
+  - first:
+      213: -8235462310635595505
+    second: forgotten_forest_example_tileset_15
+  - first:
+      213: 1336159288322438055
+    second: forgotten_forest_example_tileset_16
+  - first:
+      213: -5876727107472582377
+    second: forgotten_forest_example_tileset_17
+  - first:
+      213: -5940605014806251462
+    second: forgotten_forest_example_tileset_18
+  - first:
+      213: 7914894944178190055
+    second: forgotten_forest_example_tileset_19
+  - first:
+      213: 3299935406359855181
+    second: forgotten_forest_example_tileset_20
+  - first:
+      213: -8833796549022129412
+    second: forgotten_forest_example_tileset_21
+  - first:
+      213: -5978128222984199856
+    second: forgotten_forest_example_tileset_22
+  - first:
+      213: -468580140521633432
+    second: forgotten_forest_example_tileset_23
+  - first:
+      213: 2138863886188022599
+    second: forgotten_forest_example_tileset_24
+  - first:
+      213: 2815708800410486743
+    second: forgotten_forest_example_tileset_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 333
+        width: 513
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790021fd95a632810800000000000000
+      internalID: 1739350815322275991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_1
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 305
+        width: 287
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9294624e3c7029550800000000000000
+      internalID: 6165999377751361833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 0
+        width: 257
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 492652b7dddd03a10800000000000000
+      internalID: 1887252187191796372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 287
+        width: 193
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e24f0277ba7fe230800000000000000
+      internalID: 3670287149641450209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_4
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 301
+        width: 98
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df9cf9e4714a70630800000000000000
+      internalID: 3893260822895380989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_5
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 223
+        width: 128
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac1e5b34304bbd590800000000000000
+      internalID: -7648321616044760630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_6
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 289
+        width: 63
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 301943b03540c9fe0800000000000000
+      internalID: -1181064247561121533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_7
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 289
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be89cab2503992360800000000000000
+      internalID: 7145403934216853739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 95
+        width: 193
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4a6e8811944021c0800000000000000
+      internalID: -4530545835161785781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_9
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 159
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f177f6b2cb692180800000000000000
+      internalID: -9139655484734213647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_10
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 191
+        width: 162
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44d42db00ca0a290800000000000000
+      internalID: -7881110228725083061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_11
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 254
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d49c2e91b77ba290800000000000000
+      internalID: -7878071518407912233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_12
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 255
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d71ed58d1fc556330800000000000000
+      internalID: 3703468462369005949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_13
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 255
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fbb6e73dfa1bba30800000000000000
+      internalID: 4232005949711629300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_14
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 255
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 543288b69e31d9060800000000000000
+      internalID: 6961742492237046597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_15
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 248
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f09927d69a2c5bd80800000000000000
+      internalID: -8235462310635595505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_16
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 223
+        width: 33
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a33ccf1bcdfa8210800000000000000
+      internalID: 1336159288322438055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_17
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 96
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 719103df4dba17ea0800000000000000
+      internalID: -5876727107472582377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_18
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 137
+        width: 82
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a38b195b63bbe8da0800000000000000
+      internalID: -5940605014806251462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_19
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 0
+        width: 94
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e6b64e440b57dd60800000000000000
+      internalID: 7914894944178190055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_20
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 31
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4040dda4c9bbcd20800000000000000
+      internalID: 3299935406359855181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_21
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 31
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf2e67597dc086580800000000000000
+      internalID: -8833796549022129412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_22
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 31
+        width: 66
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0512a4ffd0c690da0800000000000000
+      internalID: -5978128222984199856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_23
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 85
+        width: 15
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 869c76748d44f79f0800000000000000
+      internalID: -468580140521633432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_24
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 0
+        width: 129
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74b062f4f55cead10800000000000000
+      internalID: 2138863886188022599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forgotten_forest_example_tileset_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 30
+        width: 193
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d788675c38631720800000000000000
+      internalID: 2815708800410486743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      forgotten_forest_example_tileset_0: 1739350815322275991
+      forgotten_forest_example_tileset_1: 6165999377751361833
+      forgotten_forest_example_tileset_10: -7881110228725083061
+      forgotten_forest_example_tileset_11: -7878071518407912233
+      forgotten_forest_example_tileset_12: 3703468462369005949
+      forgotten_forest_example_tileset_13: 4232005949711629300
+      forgotten_forest_example_tileset_14: 6961742492237046597
+      forgotten_forest_example_tileset_15: -8235462310635595505
+      forgotten_forest_example_tileset_16: 1336159288322438055
+      forgotten_forest_example_tileset_17: -5876727107472582377
+      forgotten_forest_example_tileset_18: -5940605014806251462
+      forgotten_forest_example_tileset_19: 7914894944178190055
+      forgotten_forest_example_tileset_2: 1887252187191796372
+      forgotten_forest_example_tileset_20: 3299935406359855181
+      forgotten_forest_example_tileset_21: -8833796549022129412
+      forgotten_forest_example_tileset_22: -5978128222984199856
+      forgotten_forest_example_tileset_23: -468580140521633432
+      forgotten_forest_example_tileset_24: 2138863886188022599
+      forgotten_forest_example_tileset_25: 2815708800410486743
+      forgotten_forest_example_tileset_3: 3670287149641450209
+      forgotten_forest_example_tileset_4: 3893260822895380989
+      forgotten_forest_example_tileset_5: -7648321616044760630
+      forgotten_forest_example_tileset_6: -1181064247561121533
+      forgotten_forest_example_tileset_7: 7145403934216853739
+      forgotten_forest_example_tileset_8: -4530545835161785781
+      forgotten_forest_example_tileset_9: -9139655484734213647
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
