@@ -19,10 +19,9 @@ public class EnemyBase : MonoBehaviour
         health -= damage;
         Debug.Log("Vida del enemigo: " + health);
 
-        // Si tienes una animación de "Recibir Golpe", actívala aquí
         if (anim != null)
         {
-            anim.SetTrigger("Hurt"); // Crea un Trigger llamado "Hurt" en tu Animator
+            anim.SetTrigger("Hurt"); 
         }
 
         if (health <= 0) 
@@ -32,23 +31,22 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected virtual void Die() 
+{
+    Debug.Log("Enemigo muerto");
+
+    if (anim != null)
+        anim.SetTrigger("Die");
+
+    Collider2D col = GetComponent<Collider2D>();
+    if (col != null) col.enabled = false;
+
+    Rigidbody2D rb = GetComponent<Rigidbody2D>();
+    if (rb != null)
     {
-        Debug.Log("Enemigo muerto");
-
-        if (anim != null)
-        {
-            // Activamos la animación de muerte
-            anim.SetTrigger("Die"); // Crea un Trigger llamado "Die" en tu Animator
-        }
-
-        // DESACTIVAR FÍSICAS: Muy importante para que el cadáver no te bloquee el paso
-        Collider2D col = GetComponent<Collider2D>();
-        if (col != null) col.enabled = false;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null) rb.linearVelocity = Vector2.zero; // Detenerlo en seco
-
-        // Destruir el objeto después del tiempo de la animación
-        Destroy(gameObject, deathDelay);
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = 0f; // ← Evita que "caiga" durante la animación
     }
+
+    Destroy(gameObject, deathDelay);
+}
 }
