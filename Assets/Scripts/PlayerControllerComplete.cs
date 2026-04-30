@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI; // Necesario para la UI clásica (Image, Text)
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -10,9 +10,9 @@ public class PlayerControllerComplete : MonoBehaviour
     //  INTERFACES DE USUARIO (UI)
     // ──────────────────────────────────────────────
     [Header("UI del Jugador")]
-    public Image healthImage;       // Barra de vida roja
-    public Image dashCooldownImage; // Sombra radial del Dash
-    public Text dashChargesText;    // Número de cargas
+    public Image healthImage;       
+    public Image dashCooldownImage; 
+    public Text dashChargesText;    
 
     // ──────────────────────────────────────────────
     //  ANIMATOR
@@ -33,7 +33,7 @@ public class PlayerControllerComplete : MonoBehaviour
     [SerializeField] private float sprintSpeed     = 13f;
     [SerializeField] private float sprintDuration  = 0.3f;
     [SerializeField] private int   maxSprintCharges = 3;
-    [SerializeField] private float sprintCooldown  = 1.5f; // Tiempo para recuperar 1 carga
+    [SerializeField] private float sprintCooldown  = 1.5f; 
 
     // ──────────────────────────────────────────────
     //  SALTO VARIABLE Y DOBLE SALTO
@@ -112,13 +112,13 @@ public class PlayerControllerComplete : MonoBehaviour
     private int   jumpsRemaining;
     private int   currentSprintCharges;
     private float sprintCooldownTimer;
-    private float currentDashDirection; // Dirección fija durante el dash
+    private float currentDashDirection; 
 
     private bool  jumpHeld;
     private float jumpHoldTimer;
     private bool  isJumping;
 
-    private int  currentHealth;
+    private int   currentHealth;
     private bool isDead;
 
     private Vector3 spawnPosition;
@@ -134,18 +134,34 @@ public class PlayerControllerComplete : MonoBehaviour
         rb              = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 
-        Debug.Log("Collider Height: " + capsuleCollider.size.y);
-        Debug.Log("Collider Offset Y: " + capsuleCollider.offset.y);
-
         currentSprintCharges = maxSprintCharges;
         sprintCooldownTimer  = sprintCooldown; 
         jumpsRemaining       = maxJumps;
-        currentHealth        = maxHealth;
-
-        spawnPosition = transform.position;
 
         originalColliderHeight  = capsuleCollider.size.y;
         originalColliderOffsetY = capsuleCollider.offset.y;
+
+        // ─── LÓGICA DE CARGA DE PARTIDA AÑADIDA AQUÍ ───
+        if (SaveSystem.instance != null && SaveSystem.instance.pendingLoad != null)
+        {
+            SaveData data = SaveSystem.instance.pendingLoad;
+            
+            // 1. Restaurar posición
+            transform.position = new Vector3(data.playerX, data.playerY, transform.position.z);
+            
+            // 2. Restaurar vida
+            currentHealth = data.playerHealth;
+            
+            Debug.Log("📍 Partida Cargada - Jugador posicionado en: " + transform.position + " con vida: " + currentHealth);
+        }
+        else
+        {
+            // Si es partida nueva, la vida empieza al máximo
+            currentHealth = maxHealth;
+        }
+
+        // Fijamos el punto de respawn a donde sea que hayamos aparecido
+        spawnPosition = transform.position;
     }
 
     void Update()
@@ -314,20 +330,20 @@ public class PlayerControllerComplete : MonoBehaviour
     }
 
     private void EnterCrouch()
-{
-    if (isCrouching) return;
-    isCrouching = true;
+    {
+        if (isCrouching) return;
+        isCrouching = true;
 
-    float newHeight  = originalColliderHeight * crouchHeightMultiplier;
-    float baseY      = originalColliderOffsetY - originalColliderHeight / 2f;
-    float newOffsetY = baseY + newHeight / 2f;
-    float correctionY = 0.55f;
+        float newHeight  = originalColliderHeight * crouchHeightMultiplier;
+        float baseY      = originalColliderOffsetY - originalColliderHeight / 2f;
+        float newOffsetY = baseY + newHeight / 2f;
+        float correctionY = 0.55f;
 
-    capsuleCollider.size   = new Vector2(capsuleCollider.size.x, newHeight);
-    capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, newOffsetY - correctionY);
+        capsuleCollider.size   = new Vector2(capsuleCollider.size.x, newHeight);
+        capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, newOffsetY - correctionY);
 
-    if (animator != null) animator.SetBool("IsCrouching", true);
-}
+        if (animator != null) animator.SetBool("IsCrouching", true);
+    }
 
     private void ExitCrouch()
     {
