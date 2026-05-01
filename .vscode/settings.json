@@ -67,6 +67,10 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
+<<<<<<< HEAD
     "dotnet.defaultSolution": "metroidvania.slnx",
+=======
+    "dotnet.defaultSolution": "Proyecto-MetroidVania-main.slnx",
+>>>>>>> f52a03deb5e1221587606df02a48d62654c155a1
     "dotnet.enableWorkspaceBasedDevelopment": false
 }

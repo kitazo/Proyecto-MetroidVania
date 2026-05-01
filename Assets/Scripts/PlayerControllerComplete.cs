@@ -80,7 +80,11 @@ public class PlayerControllerComplete : MonoBehaviour
     [SerializeField] private int       attackDamage = 40;
 
     // ──────────────────────────────────────────────
+<<<<<<< HEAD
     //  VIDA Y KNOCKBACK (Empuje)
+=======
+    //  VIDA Y KNOCKBACK
+>>>>>>> f52a03deb5e1221587606df02a48d62654c155a1
     // ──────────────────────────────────────────────
     [Header("Sistema de Vida")]
     [SerializeField] private int maxHealth = 100;
@@ -446,6 +450,7 @@ public class PlayerControllerComplete : MonoBehaviour
     // ──────────────────────────────────────────────────────────────────────
 
     private void Attack()
+<<<<<<< HEAD
 {
     if (animator != null) animator.SetTrigger("Attack");
 
@@ -458,6 +463,16 @@ public class PlayerControllerComplete : MonoBehaviour
             // PASAMOS EL TRANSFORM AQUÍ
             enemyScript.TakeDamage(attackDamage, transform); 
         }
+=======
+    {
+        if (animator != null) animator.SetTrigger("Attack");
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemy in hits)
+        {
+            EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
+            if (enemyScript != null) enemyScript.TakeDamage(attackDamage);
+>>>>>>> f52a03deb5e1221587606df02a48d62654c155a1
         }
     }
 
