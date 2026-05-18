@@ -153,11 +153,15 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   m_TransitionDuration: 0
 =======
   m_TransitionDuration: 0.25
 >>>>>>> f52a03deb5e1221587606df02a48d62654c155a1
+=======
+  m_TransitionDuration: 0
+>>>>>>> Stashed changes
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+<<<<<<< Updated upstream
 using System.Collections.Generic; // Obligatorio para usar List<>
 
 // ─────────────────────────────────────────────────────────────────
@@ -21,11 +22,30 @@ public class SaveData
 //  Arrastra este script a un GameObject vacío llamado "SaveSystem"
 //  en la escena del Menú Principal.
 // ─────────────────────────────────────────────────────────────────
+=======
+using System.Collections.Generic;
+
+[System.Serializable]
+public class SaveData
+{
+    public int   sceneIndex;   //Qué nivel estaba jugando
+    public float playerX;      //Posición X del jugador
+    public float playerY;      //Posición Y del jugador
+    public int   playerHealth; //Vida actual del jugador
+    public float elapsedTime;  //Tiempo acumulado en el nivel
+    public List<string> aliveEnemyIDs; 
+}
+
+>>>>>>> Stashed changes
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem instance;
 
+<<<<<<< Updated upstream
     // Datos pendientes de aplicar cuando cargue la escena del juego
+=======
+    //Datos pendientes de aplicar cuando cargue la escena del juego
+>>>>>>> Stashed changes
     [HideInInspector] public SaveData pendingLoad = null;
     [HideInInspector] public bool     isLoadingGame = false;
 
@@ -33,7 +53,10 @@ public class SaveSystem : MonoBehaviour
 
     void Awake()
     {
+<<<<<<< Updated upstream
         // Patrón Singleton – no se destruye al cambiar de escena
+=======
+>>>>>>> Stashed changes
         if (instance == null)
         {
             instance = this;
@@ -45,13 +68,21 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     // ── ¿Existe un archivo de guardado? ──────────────────────────
+=======
+    //Comprueba si existe un archivo guardado
+>>>>>>> Stashed changes
     public bool HasSaveFile()
     {
         return File.Exists(SavePath);
     }
 
+<<<<<<< Updated upstream
     // ── Guardar partida (ACTUALIZADO CON ENEMIGOS) ───────────────
+=======
+    //Guarda la partida
+>>>>>>> Stashed changes
     public void Save(int sceneIndex, Vector3 playerPosition, int health, float time, List<string> enemies)
     {
         SaveData data = new SaveData
@@ -61,7 +92,11 @@ public class SaveSystem : MonoBehaviour
             playerY       = playerPosition.y,
             playerHealth  = health,
             elapsedTime   = time,
+<<<<<<< Updated upstream
             aliveEnemyIDs = enemies // Se guarda la lista de enemigos
+=======
+            aliveEnemyIDs = enemies //Se guarda la lista de enemigos
+>>>>>>> Stashed changes
         };
 
         string json = JsonUtility.ToJson(data, true);
@@ -69,7 +104,11 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("✅ Partida y enemigos guardados en: " + SavePath);
     }
 
+<<<<<<< Updated upstream
     // ── Cargar partida ──────────────────────────────────────────
+=======
+    //Carga la partida guardada
+>>>>>>> Stashed changes
     public SaveData Load()
     {
         if (!HasSaveFile())
@@ -84,7 +123,11 @@ public class SaveSystem : MonoBehaviour
         return data;
     }
 
+<<<<<<< Updated upstream
     // ── Borrar guardado (Nueva Partida) ─────────────────────────
+=======
+    //Borra la partida guardada
+>>>>>>> Stashed changes
     public void DeleteSave()
     {
         if (File.Exists(SavePath))

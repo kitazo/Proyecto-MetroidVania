@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Damage
+<<<<<<< Updated upstream
+=======
+  - NPC
+  - Enemy
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -15,8 +20,13 @@ TagManager:
   - Suelo
   - Pared
   - Enemies
+<<<<<<< Updated upstream
   - 
   - 
+=======
+  - NPC
+  - Player
+>>>>>>> Stashed changes
   - 
   - 
   - 
