@@ -130,18 +130,10 @@ MonoBehaviour:
   jumpHoldMaxTime: 0.2
   jumpCutMultiplier: 0.4
   crouchSpeedMultiplier: 0.5
-<<<<<<< Updated upstream
-  crouchColliderHeight: 0.7
-  crouchColliderOffsetY: -0.25
-  wallSlideSpeed: 2
-  wallJumpForce: {x: 10, y: 15}
-  wallJumpDuration: 0.2
-=======
   crouchHeightMultiplier: 0.55
   wallSlideSpeed: 2
   wallJumpForce: {x: 6, y: 5}
   wallJumpDuration: 0.35
->>>>>>> Stashed changes
   groundCheck: {fileID: 3086589424590151041}
   wallCheck: {fileID: 1142464683040857532}
   checkRadius: 0.2
@@ -151,17 +143,6 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-<<<<<<< Updated upstream
-  attackPoint: {fileID: 0}
-  attackRange: 0.6
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  attackDamage: 40
-  maxHealth: 100
-  voidYThreshold: -20
-  animator: {fileID: 0}
-=======
   attackPoint: {fileID: 2666879588592517122}
   attackRange: 0.7
   enemyLayers:
@@ -208,7 +189,6 @@ MonoBehaviour:
   particulaSalto: {fileID: 0}
   tajoVfxPrefab: {fileID: 1482527665792228620, guid: e31499f023fce2441a1d205d344e30c5, type: 3}
   attackPoint: {fileID: 2666879588592517122}
->>>>>>> Stashed changes
 --- !u!50 &5660702463367985521
 Rigidbody2D:
   serializedVersion: 5
@@ -270,13 +250,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-<<<<<<< Updated upstream
-  m_Offset: {x: -0.024395308, y: 0.010550499}
-  m_Size: {x: 0.2625904, y: 0.5565804}
-=======
   m_Offset: {x: 0.0050463676, y: 0.28672352}
   m_Size: {x: 0.30189806, y: 0.56828964}
->>>>>>> Stashed changes
   m_Direction: 0
 --- !u!95 &8909545689555613632
 Animator:

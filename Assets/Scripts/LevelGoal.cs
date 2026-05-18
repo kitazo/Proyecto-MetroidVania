@@ -1,9 +1,4 @@
 using UnityEngine;
-<<<<<<< Updated upstream
-
-public class LevelGoal : MonoBehaviour
-{
-=======
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -60,17 +55,10 @@ public class LevelGoal : MonoBehaviour
 
  
     //Se activa al entrar a la meta
->>>>>>> Stashed changes
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-<<<<<<< Updated upstream
-            // Le avisa al GameManager que el jugador llegó a la meta
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.WinLevel();
-=======
             if (estaDesbloqueada)
             {
                 if (GameManager.instance != null)
@@ -120,7 +108,6 @@ public class LevelGoal : MonoBehaviour
             if (textoAviso != null)
             {
                 textoAviso.gameObject.SetActive(false);
->>>>>>> Stashed changes
             }
         }
     }
