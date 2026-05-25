@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefab/AudioManager.prefab.meta
 guid: 84d78c49623868e419d66e6e6504c253
+========
+guid: 113fc803c2b3fae419dc3557f814cd53
+>>>>>>>> main:Assets/Prefab/BolaDeFuego.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
