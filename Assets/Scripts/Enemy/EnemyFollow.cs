@@ -1,26 +1,58 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public class EnemyFollow : EnemyBase 
 {
     [Header("Configuración de Seguimiento")]
     public Transform player;
-    public float detectionRadius = 7f; //Aumentado para colinas
+    public float detectionRadius = 7f; 
     public float stoppingDistance = 0.8f; 
     public float speed = 3f;
 
     [Header("IA: Detección de Borde")]
     public float edgeCheckDistance = 0.5f;   
-    public float groundCheckDepth = 1.5f; //Rayo largo para pendientes
+    public float groundCheckDepth = 1.5f; 
     public LayerMask groundLayer;            
 
     private Vector2 movement;
     private bool EnMovimiento; 
-    private bool isFacingRight = false; 
+
+    //Sincroniza la dirección de mirada en todos los clientes
+    public NetworkVariable<bool> networkIsFacingRight = new NetworkVariable<bool>(
+        false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
+
+    public NetworkVariable<bool> networkIsMoving = new NetworkVariable<bool>(
+        false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        networkIsFacingRight.OnValueChanged += OnFacingRightChanged;
+
+        networkIsMoving.OnValueChanged += (prev, newVal) =>
+        {
+            if (anim != null) anim.SetBool("enMovimiento", newVal);
+        };
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        networkIsFacingRight.OnValueChanged -= OnFacingRightChanged;
+
+        networkIsMoving.OnValueChanged -= (prev, newVal) =>
+        {
+            if (anim != null) anim.SetBool("enMovimiento", newVal);
+        };
+    }
 
     protected override void Start()
     {
         base.Start(); 
-        if (player == null)
+        
+        if (IsServer && player == null)
         {
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
@@ -29,11 +61,38 @@ public class EnemyFollow : EnemyBase
 
     void Update()
     {
-        if (isDead || isStunned || player == null) 
+        //Toda la IA e inputs ocurren en el Servidor
+        if (!IsServer) return;
+
+        if (player == null)
         {
-            EnMovimiento = false;
-            if (anim != null) anim.SetBool("enMovimiento", false);
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) 
+            {
+                player = p.transform;
+                Debug.Log($"[EnemyFollow] Jugador encontrado tarde: {p.name}");
+            }
+            //Si aún no hay jugador, esperamos al siguiente frame sin hacer nada más
+            SetNetworkMoving(false);
+            return;
+        }
+
+        if (isDead || isStunned) 
+        {
+            SetNetworkMoving(false);
             return; 
+        }
+
+        if (networkIsPossessed.Value)
+        {
+            //Sincroniza hacia dónde mira basado en cómo lo mueve el P2
+            if (rb.linearVelocity.x > 0.1f && !networkIsFacingRight.Value) 
+                networkIsFacingRight.Value = true;
+            else if (rb.linearVelocity.x < -0.1f && networkIsFacingRight.Value) 
+                networkIsFacingRight.Value = false;
+
+            SetNetworkMoving(Mathf.Abs(rb.linearVelocity.x) > 0.1f);
+            return;
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
@@ -41,11 +100,12 @@ public class EnemyFollow : EnemyBase
         if (distanceToPlayer < detectionRadius)
         {
             float directionX = player.position.x - transform.position.x;
+            if (directionX > 0 && !networkIsFacingRight.Value) 
+                networkIsFacingRight.Value = true;
+            else if (directionX < 0 && networkIsFacingRight.Value) 
+                networkIsFacingRight.Value = false;
 
-            if (directionX > 0 && !isFacingRight) Flip();
-            else if (directionX < 0 && isFacingRight) Flip();
-
-            //Movimiento solo si hay suelo
+            //Movimiento solo si hay suelo adelante
             if (distanceToPlayer > stoppingDistance)
             {
                 if (CheckGroundAhead(directionX))
@@ -58,15 +118,33 @@ public class EnemyFollow : EnemyBase
                     EnMovimiento = false; 
                 }
             }
-            else EnMovimiento = false;
+            else 
+            {
+                EnMovimiento = false;
+            }
         }
-        else EnMovimiento = false;
+        else 
+        {
+            EnMovimiento = false;
+        }
 
-        if (anim != null) anim.SetBool("enMovimiento", EnMovimiento);
+        SetNetworkMoving(EnMovimiento);
+    }
+
+    private void SetNetworkMoving(bool value)
+    {
+        if (networkIsMoving.Value != value)
+            networkIsMoving.Value = value;
     }
 
     void FixedUpdate()
     {
+        //La física la sigue calculando exclusivamente el servidor
+        if (!IsServer) return;
+
+        //Si está poseído, la física de movimiento horizontal la maneja EnemyBase mediante MoveAsPossessed()
+        if (networkIsPossessed.Value) return;
+
         if (isDead || isStunned) return;
 
         if (EnMovimiento)
@@ -77,7 +155,6 @@ public class EnemyFollow : EnemyBase
 
     private bool CheckGroundAhead(float dirX)
     {
-        //Lanzamos el rayo desde un poco arriba para evitar errores en colinas
         Vector2 origin = new Vector2(
             transform.position.x + (dirX > 0 ? edgeCheckDistance : -edgeCheckDistance),
             transform.position.y + 0.2f 
@@ -89,27 +166,27 @@ public class EnemyFollow : EnemyBase
         return hit.collider != null;
     }
 
-    private void Flip()
+    private void OnFacingRightChanged(bool previousValue, bool isRight)
     {
-        isFacingRight = !isFacingRight;
         Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
+        localScale.x = isRight ? -Mathf.Abs(localScale.x) : Mathf.Abs(localScale.x); 
         transform.localScale = localScale;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-{
-    if (isDead || isStunned) return;
-
-
-    if (collision.gameObject.CompareTag("Player"))
     {
-        PlayerControllerComplete p = collision.gameObject.GetComponent<PlayerControllerComplete>();
-        if (p != null) 
+        //El daño por contacto solo lo aplica y calcula el Servidor
+        if (!IsServer) return;
+
+        if (isDead || isStunned) return;
+
+        if (collision.gameObject.CompareTag("Player"))
         {
-            //Le pasa el daño personalizado desde la variable de EnemyBase
-            p.TakeDamage(contactDamage, transform); 
+            PlayerControllerComplete p = collision.gameObject.GetComponent<PlayerControllerComplete>();
+            if (p != null) 
+            {
+                p.TakeDamage(contactDamage, transform); 
+            }
         }
     }
 }
-} 

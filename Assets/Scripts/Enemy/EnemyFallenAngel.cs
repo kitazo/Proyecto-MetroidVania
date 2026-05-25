@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using Unity.Netcode; 
 
 public class EnemyFlyingShooter : EnemyBase
 {
@@ -10,39 +10,35 @@ public class EnemyFlyingShooter : EnemyBase
     public Transform firePoint;
 
     [Header("Configuración de Vuelo")]
-    public float detectionRange = 12f;   //Radio de visión para perseguir
-    public float speed = 4f;            //Velocidad de traslación
-    public float followDistance = 5f;    //Distancia que mantendrá flotando ante el jugador
+    public float detectionRange = 12f;   
+    public float speed = 4f;            
+    public float followDistance = 5f;    
+    public float flapForce = 7f; //Fuerza con la que vuela hacia arriba al presionar Espacio
 
-    [Header("Efecto de Flote Sinusoidal (Estilo Castlevania)")]
-    public float waveSpeed = 3f;        //Qué tan rápido ondula de arriba a abajo
-    public float waveMagnitude = 1f;    //Amplitud de la onda de flote
+    [Header("Efecto de Flote Sinusoidal")]
+    public float waveSpeed = 3f;        
+    public float waveMagnitude = 1f;    
 
     [Header("Configuración de Disparo")]
-    public float fireCooldown = 2f;     //Segundos entre proyectiles
+    public float fireCooldown = 2f;     
     private float fireTimer;
 
     [Header("Efecto Visual de Daño")]
     public Color flashColor = Color.red;
     public float flashDuration = 0.1f;
-    private Color originalColor;
 
     private bool isFacingRight = false;
     private float timeCounter;
 
     protected override void Start()
     {
-        health = 30;           //Vida del enemigo flotante
-        contactDamage = 10;    //Daño si toca al player
+        maxHealth = 30; 
+        contactDamage = 10;    
         base.Start(); 
 
-        if (spriteRenderer != null) originalColor = spriteRenderer.color;
-
-        //Desactiva la gravedad inicial para permitir el vuelo libre
         if (rb != null) rb.gravityScale = 0f;
 
-        //Búsqueda automatizada del Player por Tag
-        if (player == null)
+        if (IsServer && player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null) player = playerObj.transform;
@@ -51,9 +47,32 @@ public class EnemyFlyingShooter : EnemyBase
         fireTimer = fireCooldown;
     }
 
+    //Al ser poseído, le damos gravedad para que el P2 tenga que mantenerlo volando con Espacio
+    public override void SetPossessed(bool value)
+    {
+        base.SetPossessed(value);
+        if (rb != null)
+        {
+            rb.gravityScale = value ? 1f : 0f;
+            if (!value) rb.linearVelocity = Vector2.zero; //Frena la caída al soltarlo
+        }
+    }
+
     void Update()
     {
-        //Si el enemigo muere o está aturdido, congela el movimiento
+        if (!IsServer) return;
+
+        //Disminuir timer de disparo aunque esté poseído
+        if (fireTimer > 0f) fireTimer -= Time.deltaTime;
+
+        if (networkIsPossessed.Value) 
+        {
+            //P2 Controla el vuelo: actualizamos hacia donde mira basado en su movimiento horizontal
+            if (rb.linearVelocity.x > 0.1f && !isFacingRight) ManejarGiroMirada();
+            else if (rb.linearVelocity.x < -0.1f && isFacingRight) ManejarGiroMirada();
+            return;
+        }
+
         if (isDead || isStunned || player == null)
         {
             if (rb != null && !isDead) rb.linearVelocity = Vector2.zero;
@@ -64,19 +83,38 @@ public class EnemyFlyingShooter : EnemyBase
 
         if (distanceToPlayer <= detectionRange)
         {
-            ManejarGiroMirada();
+            ManejarGiroMiradaManual();
             ManejarMovimientoVolador();
-            ManejarTemporizadorDisparo();
+            
+            if (fireTimer <= 0f)
+            {
+                DispararProyectil();
+                fireTimer = fireCooldown;
+            }
         }
         else
         {
-            //Estado de reposo (Idle): Flota suavemente arriba y abajo en su lugar usando linearVelocity
             if (rb != null)
             {
                 rb.linearVelocity = new Vector2(0f, Mathf.Sin(Time.time * waveSpeed) * waveMagnitude * 0.5f);
             }
-            
         }
+    }
+
+    //Polimorfismo para disparar con Clic / J
+    public override void AttackAsPossessed()
+    {
+        if (!IsServer || fireTimer > 0f) return;
+        DispararProyectil();
+        fireTimer = fireCooldown;
+    }
+
+    //Polimorfismo para volar hacia arriba (Aletear) con Espacio
+    public override void SpecialActionAsPossessed()
+    {
+        if (!IsServer || rb == null) return;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); //Anulamos la caída para un salto limpio
+        rb.AddForce(Vector2.up * flapForce, ForceMode2D.Impulse);
     }
 
     void ManejarMovimientoVolador()
@@ -90,20 +128,8 @@ public class EnemyFlyingShooter : EnemyBase
 
         if (rb != null)
         {
-            //Aplica las físicas unificadas con la propiedad linearVelocity
             rb.linearVelocity = new Vector2(movimientoBase.x, movimientoBase.y + floteVertical);
-            
             if (anim != null) anim.SetBool("enMovimiento", rb.linearVelocity.magnitude > 0.2f);
-        }
-    }
-
-    void ManejarTemporizadorDisparo()
-    {
-        fireTimer -= Time.deltaTime;
-        if (fireTimer <= 0f)
-        {
-            DispararProyectil();
-            fireTimer = fireCooldown;
         }
     }
 
@@ -111,21 +137,38 @@ public class EnemyFlyingShooter : EnemyBase
     {
         if (projectilePrefab == null || firePoint == null) return;
 
-        if (anim != null) anim.SetTrigger("Attack");
+        TriggerAttackAnimClientRpc();
 
-        Vector2 direccionDisparo = (player.position - firePoint.position).normalized;
+        //Si está poseído, dispara hacia donde mira, si no, dispara hacia el jugador
+        Vector2 direccionDisparo;
+        if (networkIsPossessed.Value)
+        {
+            direccionDisparo = isFacingRight ? Vector2.right : Vector2.left;
+        }
+        else
+        {
+            direccionDisparo = (player.position - firePoint.position).normalized;
+        }
+
         float angulo = Mathf.Atan2(direccionDisparo.y, direccionDisparo.x) * Mathf.Rad2Deg;
 
-        Instantiate(projectilePrefab, firePoint.position, Quaternion.Euler(0, 0, angulo));
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.Euler(0, 0, angulo));
+        projectile.GetComponent<NetworkObject>().Spawn();
     }
 
-    void ManejarGiroMirada()
+    [ClientRpc]
+    private void TriggerAttackAnimClientRpc()
     {
-        if (player.position.x > transform.position.x && !isFacingRight) Flip();
-        else if (player.position.x < transform.position.x && isFacingRight) Flip();
+        if (anim != null) anim.SetTrigger("Attack");
     }
 
-    private void Flip()
+    void ManejarGiroMiradaManual()
+    {
+        if (player.position.x > transform.position.x && !isFacingRight) ManejarGiroMirada();
+        else if (player.position.x < transform.position.x && isFacingRight) ManejarGiroMirada();
+    }
+
+    private void ManejarGiroMirada()
     {
         isFacingRight = !isFacingRight;
         Vector3 localScale = transform.localScale;
@@ -133,13 +176,10 @@ public class EnemyFlyingShooter : EnemyBase
         transform.localScale = localScale;
     }
 
-    //Polimorfismo para añadir el parpadeo rojo sobre tu sistema base
-    public override void TakeDamage(int damage, Transform damageSource)
-    {
-        if (isDead) return;
 
-        //Ejecuta el daño, el trigger "Hurt", el knockback y el stun
-        base.TakeDamage(damage, damageSource); 
+    protected override void OnTakeDamageEffects(Vector3 sourcePosition)
+    {
+        base.OnTakeDamageEffects(sourcePosition);
 
         if (spriteRenderer != null)
         {
@@ -148,17 +188,12 @@ public class EnemyFlyingShooter : EnemyBase
         }
     }
 
-    //Forzamos al enemigo a caer físicamente en lugar de flotar al morir
-    protected override void Die()
+    protected override void OnDieEffects()
     {
-        //Ejecuta el trigger "Die"
-        base.Die(); 
-        
+        base.OnDieEffects(); //Llama método normal
+
         this.enabled = false; 
-        if (rb != null)
-        {
-            rb.gravityScale = 1f;
-        }
+        if (rb != null) rb.gravityScale = 1f;
     }
 
     private IEnumerator FlashRoutine()
